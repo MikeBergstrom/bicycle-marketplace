@@ -1,0 +1,47 @@
+<h3><a style="font-weight: bold" [routerLink]="['/bikes']">Browse</a>  |  <a [routerLink]="['/manage']">My Listings</a>  |  <a href='/logout'>Log Off</a></h3>
+
+<div>
+  <h1>Create Listing</h1>
+  <form (submit)='add()' #createForm='ngForm'>
+    <label>Image Upload (url): </label>
+    <input type="text" name="image" required [(ngModel)]='bike.image' #image='ngModel'><br>
+    
+    <label>Title: </label>
+    <input type="text" name="title" required [(ngModel)]='bike.title' #title='ngModel'><br>
+
+    <label>Description: </label>
+    <input type="text" name="description" required [(ngModel)]='bike.description' #description='ngModel'><br>
+    
+    <label>Price: $</label> 
+    <input type="currenct" name="price" min='1' required [(ngModel)]='bike.price' #price='ngModel'><br>
+    
+    <label>Location: </label>
+    <input type="text" name="location" required [(ngModel)]='bike.location' #location='ngModel'><br>
+
+    <input type="submit"  value="Create" [disabled]='!createForm.form.valid'>
+  </form>
+</div>
+
+<div>
+  <div *ngFor='let bike of user.bicycles, let idx = index'>
+    <img [src]=bike.image width="200">
+    <form (submit)='update(idx)'>
+    <input type="text" name="image" value={{bike.image}} [(ngModel)]='bike.image'><br>
+
+    <label>Title: </label>
+    <input type="text" name="title" value={{bike.title}} [(ngModel)]='bike.title'><br>
+
+    <label>Description: </label>
+    <input type="text" name="description" value={{bike.description}} [(ngModel)]='bike.decription'><br>
+
+    <label>Price: $</label>
+    <input type="text" name="price" value={{bike.price}} [(ngModel)]='bike.price'><br>
+
+    <label>Location: </label>
+    <input type="text" name="location" value={{bike.location}} [(ngModel)]='bike.location'><br>
+
+    <input type="submit" value="Update">
+    </form>
+    <button (click)='delete(bike)'>Delete</button>
+  </div>
+</div>

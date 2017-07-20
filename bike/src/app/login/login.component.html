@@ -1,0 +1,76 @@
+<h1> Bicycle Marketplace</h1>
+
+<h2>Bike of the Day!</h2>
+<div>
+  <img [src]=bikes[index].image width="200">
+  <p>{{bikes[index].title}}</p>
+  <p>{{bikes[index].description}}</p>
+  <p>{{bikes[index].price}}</p>
+  <p>{{bikes[index].location}}</p>
+</div><br>
+
+
+<div id='login'>
+  <h1>Login</h1>
+  <form (submit)='login()' #loginForm='ngForm'>
+    *Email: <input type="text" name="email" required [(ngModel)]="login_user.email"><br>
+    *Password: <input type="password" name="password" required [(ngModel)]="login_user.password"><br>
+    <input type="submit" value="Login">
+  </form>
+  <span style="color:red;" *ngIf='login_error'>Email or password is incorrect</span>
+</div>
+
+<div id='registration'>
+<h1>Registration</h1>
+
+<form (submit)="register()" #formData ='ngForm'>
+  <h3>Account Information</h3>
+  *First Name: 
+  <input
+   type="text" 
+   name="first_name"
+   required
+   [(ngModel)]="user.first_name"
+   #first_name='ngModel'> <span style="color: red;" *ngIf="first_name.errors && first_name.touched">First Name is required</span> <br>
+
+  *Last Name: 
+  <input 
+  type="text" 
+  name="last_name"
+  required
+  [(ngModel)]="user.last_name"
+  #last_name='ngModel'><span style="color: red;" *ngIf="last_name.errors && last_name.touched">Last Name is required</span><br>
+
+  *Email: 
+  <input 
+  type="text" 
+  name="email"
+  required
+   [(ngModel)]="user.email"
+   #email='ngModel'><span style="color: red;" *ngIf="email.errors && password.touched">Email is required</span><br>
+
+  *Password: 
+  <input 
+  type="password" 
+  name="password"
+  required
+  minlength="8"
+   [(ngModel)]="user.password"
+   #password='ngModel'><span style="color: red;" *ngIf="password.errors && password.touched">Password must be 8 characters long</span><br>
+
+  *Password Confirmation: 
+  <input 
+  type="password" 
+  name="confirm"
+  validateEqual="password"
+  [(ngModel)]='user.confirm'
+  #confirm='ngModel'
+  ><span style="color: red;" *ngIf="confirm.errors && password.touched && confirm.dirty">Passwords do not match</span><br>
+
+  <input 
+  type="submit" 
+  [disabled] = "!formData.form.valid"
+  value="Register">
+  <span style="color:red;" *ngIf='register_error'>Email is already registered</span>
+</form>
+</div>

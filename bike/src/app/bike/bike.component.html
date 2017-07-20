@@ -1,0 +1,16 @@
+<h3><a style="font-weight: bold" [routerLink]="['/bikes']">Browse</a>  |  <a [routerLink]="['/manage']">My Listings</a>  |  <a href='/logout'>Log Off</a></h3>
+
+<form (submit)='searchset()'>
+    <input type="text" name="search" [(ngModel)]='search.term'>
+</form>
+
+<div *ngFor='let bike of bikes'>
+    <div *ngIf='bike.title.includes(search.term)'>
+        <img [src]=bike.image width="200">
+        <p>{{bike.title}}</p>
+        <p>{{bike.description}}</p>
+        <p>${{bike.price}}</p>
+        <p>{{bike.location}}</p>
+        <button *ngIf='!(user._id == bike._user._id)' (click)='show(bike)'>Contact</button>
+        <button *ngIf='user._id == bike._user._id' (click)='delete(bike)'>Delete</button>
+</div>
