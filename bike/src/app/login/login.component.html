@@ -17,8 +17,9 @@
     *Password: <input type="password" name="password" required [(ngModel)]="login_user.password"><br>
     <input type="submit" value="Login">
   </form>
-  <span style="color:red;" *ngIf='login_error'>Email or password is incorrect</span>
-</div>
+  <span style="color:red;" *ngIf='login_error.status && login_error.message._body < 5'>Email or password is incorrect</span>
+  <span style="color:red;" *ngIf='login_error.status && login_error.message._body >= 5'>You have made too many failures, login is disabled for one hour</span>
+  </div>
 
 <div id='registration'>
 <h1>Registration</h1>

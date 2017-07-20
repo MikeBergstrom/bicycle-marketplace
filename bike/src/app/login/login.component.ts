@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   user = new User();
   login_user = new User()
   register_error = false;
-  login_error = false;
+  login_error = {status:false, message:{}};
   bikes = [];
   index = 0;
   constructor(private _apiService: ApiService, private _router:Router) { }
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
     console.log("login attempt", this.login_user)
     this._apiService.login(this.login_user)
     .then(() => {console.log("login success in componnent"); this._router.navigate(['bikes'])})
-    .catch(() => {console.log("login fail component"); this.login_error = true})
+    .catch(err => {console.log("login fail component", err); this.login_error.status = true; this.login_error.message=err})
 
   }
 
